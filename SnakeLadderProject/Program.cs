@@ -1,12 +1,13 @@
 ﻿using System;
-/// snake ladder game played with single player 
-/// at start position 0
+/// The Player rolls the die to get a number 
+/// between 1 to 6.
 
 class Program
 {
     static void Main(string[] args)
     {
-        int position = 0;
-        Console.WriteLine("starting the game at position " + position);
+        Random random = new Random();
+        int dice = random.Next(1, 6);
+        Console.WriteLine("dice rolled = " + dice);
     }
 }
