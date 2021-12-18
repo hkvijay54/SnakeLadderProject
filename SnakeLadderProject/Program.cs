@@ -5,12 +5,12 @@
 
 class Program
 {
-    
+
     static void Main(string[] args)
     {
         int Position = 0;
         int i = 0;
-       
+
         Random random = new Random();
 
         while (i <= 100)
@@ -35,7 +35,7 @@ class Program
                 Console.WriteLine("The Position Now " + Position);
                 i++;
             }
-           
+
         }
         Console.WriteLine("num " + i);
     }
