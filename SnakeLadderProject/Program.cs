@@ -32,6 +32,11 @@ class Program
                     Console.WriteLine("Payer won" + Position);
                     break;
                 }
+                else if (Position+dice >= 100)
+                {
+                    Console.WriteLine("not possible to move" + dice);
+                    Position = Position + 0;
+                }
                 else
                 {
                     Position = Position + dice;
