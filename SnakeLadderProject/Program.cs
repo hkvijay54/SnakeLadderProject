@@ -1,42 +1,72 @@
 ﻿using System;
-/// The Player then checks for a Option.
-/// They are No Play,Ladder or Snake.
 
 
 class Program
 {
+    public static int curpostion = 0;
+    static Boolean playerTurn = true;
 
+    public static int dieRollPlay(int position, string Player)
+    {
+        const int NO_PLAY = 0;
+        const int LADDER = 1;
+        const int SNAKE = 2;
+
+        Random rand = new Random();
+        int diceNumber = rand.Next(1, 7);
+        int playOption = rand.Next(0, 3);
+        switch (playOption)
+        {
+            case NO_PLAY:
+                break;
+            case LADDER:
+                position = position + diceNumber;
+                if (position != 100)
+                {
+                    dieRollPlay(position, Player);
+                }
+                break;
+            case SNAKE:
+                position = position - diceNumber;
+                if (position < 0)
+                {
+                    position = 0;
+                }
+                break;
+
+        }
+        Console.WriteLine("Position of Player {0} : {1}", Player, position);
+        return position;
+    }
     static void Main(string[] args)
     {
-        int Position = 0;
-        int i = 0;
+        Console.WriteLine("----Snake & Ladder Game----");
+        int postionPlayer1 = 0;
+        int postionPlayer2 = 0;
+        int diceRollCount = 0;
 
-        Random random = new Random();
-
-        while (i <= 100)
+        while (postionPlayer1 < 100 && postionPlayer2 < 100)
         {
-            int dice = random.Next(1, 6);
-            Console.WriteLine("dice rolled and got = " + dice);
-            Console.WriteLine("Current you are in " + Position);
-            if (Position == 100)
+            diceRollCount++;
+            if (playerTurn)
             {
-                Console.WriteLine("Game Won" + Position);
-                break;
-            }
-            else if (Position + dice > 100)
-            {
-                Console.WriteLine("Not possible move");
-                Position = Position + 0;
-                i++;
+                postionPlayer1 = dieRollPlay(postionPlayer1, "Player1");
             }
             else
             {
-                Position = Position + dice;
-                Console.WriteLine("The Position Now " + Position);
-                i++;
+                postionPlayer2 = dieRollPlay(postionPlayer2, "Player2");
             }
-
+            playerTurn = !playerTurn;
         }
-        Console.WriteLine("num " + i);
+        if (postionPlayer1 == 100)
+        {
+            Console.WriteLine("Player1 Wins !");
+            Console.WriteLine("Total Nnumber of the dice rolled for Player 1 is: " + diceRollCount);
+        }
+        else
+        {
+            Console.WriteLine("Player2 Wins!");
+            Console.WriteLine("Total Nnumber of the dice rolled for Player 2 is: " + diceRollCount);
+        }
     }
 }
